@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopEase — E-Commerce Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      color: #e8e8e8;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 52px 60px;
+      text-align: center;
+      max-width: 480px;
+      width: 90%;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 36px;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .logo span { color: #d4ff00; }
+    .tagline {
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 0.14em;
+      margin-bottom: 48px;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .link-btn {
+      display: block;
+      padding: 16px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+    .link-store {
+      background: #d4ff00;
+      color: #000;
+    }
+    .link-store:hover {
+      background: #c8f000;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(212,255,0,0.25);
+    }
+    .link-admin {
+      background: #1e1e1e;
+      color: #e8e8e8;
+      border: 1px solid #333;
+    }
+    .link-admin:hover {
+      border-color: #555;
+      transform: translateY(-2px);
+    }
+    .desc {
+      font-size: 11px;
+      color: #555;
+      margin-top: 32px;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🛍 ShopEase</div>
+    <p class="tagline">VANILLA JS E-COMMERCE ENGINE</p>
+    <div class="links">
+      <a href="store/index.html" class="link-btn link-store">🛍 Open Storefront</a>
+      <a href="admin/index.html" class="link-btn link-admin">⬡ Admin Dashboard</a>
+    </div>
+    <p class="desc">
+      Pure HTML · CSS · Vanilla JS<br/>
+      localStorage persistence · Real-time stock sync
+    </p>
+  </div>
+</body>
+</html>
