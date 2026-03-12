@@ -1,4 +1,7 @@
 # 🛍️ ShopEase — Vanilla JS E-Commerce Engine
+deploy link: 
+https://23f-0644-haseeb-assignment03-bscs6f.netlify.app/
+
 
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
