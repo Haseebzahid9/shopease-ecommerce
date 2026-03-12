@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopEase — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">🛍</span>
+      <span class="brand-name">ShopEase</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active">
+        <span class="nav-icon">⬡</span> Inventory
+      </a>
+      <a href="../store/index.html" class="nav-item" target="_blank">
+        <span class="nav-icon">◈</span> Storefront ↗
+      </a>
+    </nav>
+    <div class="sidebar-stats">
+      <div class="stat-item">
+        <span class="stat-label">TOTAL PRODUCTS</span>
+        <span class="stat-value" id="stat-total">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">LOW STOCK</span>
+        <span class="stat-value warning" id="stat-low">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">OUT OF STOCK</span>
+        <span class="stat-value danger" id="stat-out">0</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-title">Inventory <span class="title-accent">Dashboard</span></h1>
+        <p class="page-sub">Manage your product catalog and stock levels</p>
+      </div>
+      <button class="btn-primary" id="btn-add-product">
+        <span>+</span> Add Product
+      </button>
+    </header>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <input type="text" class="filter-input" id="filter-search" placeholder="Search products..." />
+      <select class="filter-select" id="filter-category">
+        <option value="">All Categories</option>
+      </select>
+      <div class="filter-count">Showing <span id="filter-count">0</span> products</div>
+    </div>
+
+    <!-- Inventory Table -->
+    <div class="table-wrapper">
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="product-table-body">
+        </tbody>
+      </table>
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">◫</div>
+        <p>No products found. Add your first product.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Add New Product</h2>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+
+      <form id="product-form" novalidate>
+        <input type="hidden" id="product-id" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="product-name">Product Name</label>
+            <input type="text" class="form-input" id="product-name" placeholder="e.g. Obsidian Keyboard" />
+            <span class="form-error" id="error-name"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="product-category">Category</label>
+            <input type="text" class="form-input" id="product-category" placeholder="e.g. Electronics" />
+            <span class="form-error" id="error-category"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="product-price">Price ($)</label>
+            <input type="number" class="form-input" id="product-price" placeholder="0.00" step="0.01" min="0.01" />
+            <span class="form-error" id="error-price"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="product-stock">Stock Quantity</label>
+            <input type="number" class="form-input" id="product-stock" placeholder="0" min="1" />
+            <span class="form-error" id="error-stock"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="product-image">Image URL</label>
+          <input type="url" class="form-input" id="product-image" placeholder="https://..." />
+          <span class="form-error" id="error-image"></span>
+        </div>
+
+        <div class="image-preview-wrap" id="image-preview-wrap">
+          <img id="image-preview" src="" alt="Preview" />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-ghost" id="btn-cancel">Cancel</button>
+          <button type="submit" class="btn-primary" id="btn-submit">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="modal-overlay" id="delete-overlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Delete</h2>
+        <button class="modal-close" id="delete-cancel-x">✕</button>
+      </div>
+      <p class="delete-msg">Are you sure you want to remove <strong id="delete-product-name"></strong> from inventory? This cannot be undone.</p>
+      <div class="form-actions">
+        <button type="button" class="btn-ghost" id="delete-cancel">Cancel</button>
+        <button type="button" class="btn-danger" id="delete-confirm">Delete Product</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/storage.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
